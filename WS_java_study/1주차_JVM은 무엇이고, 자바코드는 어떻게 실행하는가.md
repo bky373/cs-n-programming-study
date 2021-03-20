@@ -1,4 +1,4 @@
-# 1주차) JVM은 무엇이고, 자바 코드는 어떻게 실행하는가?
+# 1주차_JVM은 무엇이고, 자바 코드는 어떻게 실행하는가?
 
 ## 목표
 
@@ -11,6 +11,8 @@
 3. 자바 애플리케이션 실행하기
 4. JVM이란 무엇인가
 5. JVM의 구성 및 JVM이 하는 일
+6. JIT 컴파일러란 무엇이며 어떻게 동작하는가
+
 
 ## 1. 자바가 컴파일 하는 방법
 
@@ -161,7 +163,7 @@ Hello Java
 - 다른 애플리케이션과 달리 자바는 JVM을 한 번 더 거쳐야 하기 때문에 속도가 느리다고 하는데, 요즘에는 기술이 발전했기 때문에 꼭 그렇지 않다.
 - `Oracle`에서 JVM의 명세(스펙)을 정의하면, 공급업체(vendor)들이 실제 그래픽카드처럼 JVM 실물을 만들어 배포한다. 
 
-### 왜 JVM을 사용해야 하나 ? (등장 배경)
+### 왜 JVM을 사용해야 하는가? (등장 배경)
 
 - C/C++처럼 크로스 컴파일(`타겟 플랫폼에 맞춰 컴파일`)해서 배포하면 되는데, 굳이 왜 JVM을?
 
@@ -179,13 +181,13 @@ Hello Java
 
 ### JVM Architecture Diagram
 
-<img src="https://images.velog.io/images/bky373/post/50e994f6-f444-4a9d-a732-f01e6e767f90/image.png" style="zoom:50%;" />	
+<img src="https://images.velog.io/images/bky373/post/50e994f6-f444-4a9d-a732-f01e6e767f90/image.png" style="zoom: 40%;" />	
 
-<img src="https://images.velog.io/images/bky373/post/53d20bcd-9987-49a7-9f43-00dcde6b1a7a/image.png" style="zoom: 50%;" />
+<img src="https://images.velog.io/images/bky373/post/53d20bcd-9987-49a7-9f43-00dcde6b1a7a/image.png" style="zoom: 40%;" />
 
-<img src="https://images.velog.io/images/bky373/post/8a32487e-921c-4d39-ba3e-8684ed8e2840/image.png" style="zoom: 50%;" />
+<img src="https://images.velog.io/images/bky373/post/8a32487e-921c-4d39-ba3e-8684ed8e2840/image.png" style="zoom: 40%;" />
 
-> Reference : [The JVM Architecture Explained - DZone Java](https://dzone.com/articles/jvm-architecture-explained)
+> Reference : [The JVM Architecture Explained - DZone Java](https://dzone.com/articles/jvm-architecture-explained) 
 
 JVM은 크게
 
@@ -195,13 +197,13 @@ JVM은 크게
 
 3. **런타임 데이터 영역**(Runtime Data Area)으로 나뉜다.
 
-### 각 구성 요소가 하는 일
+## 각 구성 요소가 하는 일
 
 클래스 로더(Class Loader)가 자바 바이트코드를 런타임 데이터 영역(Runtime Data Areas)에 로드하고, 실행 엔진(Execution Engine)이 자바 바이트코드를 실행한다.
 
 > 이하 각 구성 요소의 내용은 [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)의 내용을 상당 부분 참조하였다.
 
-### 1. Class Loader
+## 1. Class Loader
 
 클래스 로더 작업은 **런타임** 때 **처음**으로 **클래스**를 **참조**할 때 발생한다. 클래스 로드를 요청받으면, 클래스 로더 캐시, 상위 클래스 로더, 자기 자신의 순서로 해당 클래스가 있는지 확인한다. 부트스트랩 클래스 로더까지 확인해도 없으면, 요청받은 클래스 로더가 파일 시스템에서 해당 클래스를 찾는다.
 
@@ -216,7 +218,7 @@ JVM은 크게
 
 > Reference : [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
 
-#### 로드 (Load)
+### 로드 (Load)
 
 클래스를 파일에서 가져와서 JVM 메모리에 로드한다.
 
@@ -228,7 +230,7 @@ JVM은 크게
 >
 > ( [JVM Internals](https://blog.jamesdbloom.com/JVMInternals.html#dynamic_linking) )
 
-#### 링크 (Link)
+### 링크 (Link)
 
 연결은 클래스 또는 인터페이스를 **가져와** 이들의 유형과 다이렉트 수퍼 클래스와 수퍼 인터페이스를 **검사**하고 **준비**하는 프로세스이다. 연결은 검사, 준비 및 선택적으로 **해결**하는 세 단계로 구성된다. ( [JVM Internals](https://blog.jamesdbloom.com/JVMInternals.html#dynamic_linking) )
 
@@ -240,7 +242,7 @@ JVM은 크게
 
    > Dynamic Linking and Resolution과 관련해서 [여기](https://www.artima.com/insidejvm/ed2/linkmodP.html) 자세한 내용이 담겨있다.
 
-#### 초기화 (Initialization)
+### 초기화 (Initialization)
 
 클래스 변수들을 적절한 값으로 초기화한다. static initializer들을 수행하고, static 필드들을 **설정된 값으로 초기화**한다.
 
@@ -248,11 +250,11 @@ JVM은 크게
 >
 > ( [Oracle Docs]( https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-5.html) )
 
-### 2. Runtime Data Area
+## 2. Runtime Data Area
 
 런타임 데이터 영역은 JVM이 운영체제 위에서 실행되면서 할당받는 메모리 영역이다. 이 영역은 크게 **5개**(런타임 상수 풀까지 6개)의 구성 요소를 갖는다.
 
-![](https://images.velog.io/images/bky373/post/6886366f-5bc1-4e05-b6d3-f4dc82a4a5db/image.png)
+<img src="https://images.velog.io/images/bky373/post/6886366f-5bc1-4e05-b6d3-f4dc82a4a5db/image.png" style="zoom:40%;" />
 
 > 처음 JVM Architecture 그림과 동일하나, 달라진 부분이 하나 있다면, Runtime Constant Pool이 Method Area 내부에 추가되었다.<br> [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)의 그림 자료를 참고하였다. 
 
@@ -281,7 +283,7 @@ JVM은 크게
 
    > 심볼릭 레퍼런스(Symbolic Reference) : 실제로 물리적 메모리 위치를 가리키는 참조가 아닌 논리적 참조를 의미한다. JVM 구현은 이 심볼릭 레퍼런스를 해석할 시기를 선택할 수 있다.
 
-   #### 런타임 상수 풀 사용 예시
+   ### 런타임 상수 풀 사용 예시
 
    ```java
    Object foo = new Object();
@@ -312,7 +314,7 @@ JVM은 크게
 
 6. 네이티브 메소드 스택(Native Method Stack): 자바가 아닌 언어로 작성된 **네이티브 코드**를 위한 스택이다. JNI(Java Native Interface)를 통해 호출하는 C/C++ 등의 코드를 수행하기 위한 스택으로 언어에 맞게 C 스택이나 C++ 스택이 생성된다.
 
- ### Stack Frame
+### Stack Frame
 
 JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생성되어 해당 스레드의 JVM 스택에 추가되고, 메소드가 종료되면 스택 프레임이 제거된다. 
 **스택 프레임**은 아래 **세 가지** 항목으로 나뉜다.
