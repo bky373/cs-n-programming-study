@@ -10,9 +10,11 @@
 2. 자바 바이트코드란 무엇인가
 3. 자바 애플리케이션 실행하기
 4. JVM이란 무엇인가
-5. JVM의 구성 및 JVM이 하는 일
-6. JIT 컴파일러란 무엇이며 어떻게 동작하는가
-
+5. JVM의 구성(이미지)
+6. JVM 구성 요소가 하는 일
+7. JIT 컴파일러란 무엇이며 어떻게 동작하는가
+8. JDK와 JRE의 차이
+9. Garbage Collection에 관하여..
 
 ## 1. 자바가 컴파일 하는 방법
 
@@ -91,6 +93,8 @@
 
 ## 2. 자바 바이트코드란 무엇인가
 
+### 자바 바이트코드
+
 - **JVM이 이해할 수 있는 코드**로,  **`.class` 파일에 들어 있는 코드**이다.
 
   > 바이트코드는 **JVM의 인터프리터**를 거쳐야 한다. **기계어가 아니기 때문에** **OS에서 바로 실행되지 않는다**. 
@@ -156,14 +160,16 @@ Hello Java
 
 ## 4. JVM이란 무엇인가
 
-### JVM ( Java Virtual Machine, 자바 가상 기계 )
+### JVM 
+
+>  Java Virtual Machine, 자바 가상 기계
 
 - 말그대로, **자바 기술을 활용한 애플리케이션을 실행시키는 가상 기계**를 뜻한다. 모든 자바 애플리케이션은 이 JVM 위에서 동작한다. (사실 Java 뿐 아니라 Kotlin, Scala 등도 JVM 위에서 작동한다.)
 - JVM은 **특정 OS에 맞게 자바 언어를 변환한다**. (`Interpreter`와 `JIT Compiler`가 기계어로 변환해준다.)<br> 결국 특정 OS와 마주하는 건 JVM이기 때문에, **자바는 운영체제에 독립적**이고, **JVM은 운영체제에 종속적**이다. 
 - 다른 애플리케이션과 달리 자바는 JVM을 한 번 더 거쳐야 하기 때문에 속도가 느리다고 하는데, 요즘에는 기술이 발전했기 때문에 꼭 그렇지 않다.
 - `Oracle`에서 JVM의 명세(스펙)을 정의하면, 공급업체(vendor)들이 실제 그래픽카드처럼 JVM 실물을 만들어 배포한다. 
 
-### 왜 JVM을 사용해야 하는가? (등장 배경)
+### JVM의 등장 배경
 
 - C/C++처럼 크로스 컴파일(`타겟 플랫폼에 맞춰 컴파일`)해서 배포하면 되는데, 굳이 왜 JVM을?
 
@@ -177,9 +183,7 @@ Hello Java
 
 > Reference :  [[10분 테코톡] 무민의 JVM Stack & Heap - 우아한Tech 채널](https://www.youtube.com/watch?v=UzaGOXKVhwU)
 
-## 5. JVM의 구성 및 JVM이 하는 일
-
-### JVM Architecture Diagram
+## 5. JVM의 구성(이미지)
 
 <img src="https://images.velog.io/images/bky373/post/50e994f6-f444-4a9d-a732-f01e6e767f90/image.png" style="zoom: 40%;" />	
 
@@ -193,23 +197,23 @@ JVM은 크게
 
 1. **클래스 로더**(Class Loader)
 
-2. **실행 엔진**(Excecution Engine)
+2. **런타임 데이터 영역**(Runtime Data Area)
 
-3. **런타임 데이터 영역**(Runtime Data Area)으로 나뉜다.
+3. **실행 엔진**(Excecution Engine)으로 나뉜다.
 
-## 각 구성 요소가 하는 일
+## 6. JVM 구성 요소가 하는 일
 
 클래스 로더(Class Loader)가 자바 바이트코드를 런타임 데이터 영역(Runtime Data Areas)에 로드하고, 실행 엔진(Execution Engine)이 자바 바이트코드를 실행한다.
 
 > 이하 각 구성 요소의 내용은 [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)의 내용을 상당 부분 참조하였다.
 
-## 1. Class Loader
+### 1. 클래스 로더
 
 클래스 로더 작업은 **런타임** 때 **처음**으로 **클래스**를 **참조**할 때 발생한다. 클래스 로드를 요청받으면, 클래스 로더 캐시, 상위 클래스 로더, 자기 자신의 순서로 해당 클래스가 있는지 확인한다. 부트스트랩 클래스 로더까지 확인해도 없으면, 요청받은 클래스 로더가 파일 시스템에서 해당 클래스를 찾는다.
 
 1. 부트스트랩 클래스 로더(Boostrap Class Loader) : JVM을 가동할 때 생성되며, Object 클래스들을 비롯한 자바 API들을 로드한다. 
-2. 익스텐션 클래스 로더(Extension Class Loader) : 기본 자바 API를 제외한 ext 폴더(jre ㅋ lib) 내에있는 확장 클래스들을 로드한다. 
-3. 시스템 클래스 로더(System Class Loader) : 위의 두 로더가 JVM 자체의 구성 요소들을 로드하는 거라면, 시트템 클래스 로더는 애플리케이션의 클래스들을 로드한다고 볼 수 있다. 사용자가 지정한 $CLASSPATH 내의 클래스들을 로드한다.
+2. 익스텐션 클래스 로더(Extension Class Loader) : 기본 자바 API를 제외한 확장 클래스들을 로드한다. (자바 9부터 플랫폼 클래스 로더로 이름 변경)
+3. 시스템 클래스 로더(System Class Loader) : 위의 두 로더가 JVM 자체의 구성 요소들을 로드하는 거라면, 시트템 클래스 로더는 애플리케이션의 클래스들을 로드한다고 볼 수 있다. 사용자가 지정한 $CLASSPATH 내의 클래스들을 로드한다. (자바 9 이전엔 애플리케이션 클래스 로더)
 4. 사용자 정의 클래스 로더(User-Defined Class Loader) : 애플리케이션 사용자가 직접 코드 상에서 생성해서 사용하는 클래스 로더이다.
 
 클래스 로더가 아직 로드되지 않은 클래스를 발견하면, 아래 그림과 같은 과정을 거쳐 클래스를 로드, 링크, 초기화한다.
@@ -218,7 +222,7 @@ JVM은 크게
 
 > Reference : [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
 
-### 로드 (Load)
+### 로드
 
 클래스를 파일에서 가져와서 JVM 메모리에 로드한다.
 
@@ -230,7 +234,7 @@ JVM은 크게
 >
 > ( [JVM Internals](https://blog.jamesdbloom.com/JVMInternals.html#dynamic_linking) )
 
-### 링크 (Link)
+### 링크
 
 연결은 클래스 또는 인터페이스를 **가져와** 이들의 유형과 다이렉트 수퍼 클래스와 수퍼 인터페이스를 **검사**하고 **준비**하는 프로세스이다. 연결은 검사, 준비 및 선택적으로 **해결**하는 세 단계로 구성된다. ( [JVM Internals](https://blog.jamesdbloom.com/JVMInternals.html#dynamic_linking) )
 
@@ -242,7 +246,7 @@ JVM은 크게
 
    > Dynamic Linking and Resolution과 관련해서 [여기](https://www.artima.com/insidejvm/ed2/linkmodP.html) 자세한 내용이 담겨있다.
 
-### 초기화 (Initialization)
+### 초기화
 
 클래스 변수들을 적절한 값으로 초기화한다. static initializer들을 수행하고, static 필드들을 **설정된 값으로 초기화**한다.
 
@@ -250,7 +254,7 @@ JVM은 크게
 >
 > ( [Oracle Docs]( https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-5.html) )
 
-## 2. Runtime Data Area
+### 2. 런타임 데이터 영역
 
 런타임 데이터 영역은 JVM이 운영체제 위에서 실행되면서 할당받는 메모리 영역이다. 이 영역은 크게 **5개**(런타임 상수 풀까지 6개)의 구성 요소를 갖는다.
 
@@ -422,5 +426,71 @@ JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생
 
    > Reference : [Runtime Data Area 구조](https://www.kdata.or.kr/info/info_04_view.html?field=&keyword=&type=techreport&page=19&dbnum=183668&mode=detail&type=techreport)
 
+### 3. 실행 엔진 (Execution Engine)
 
+**바이트코드**를 **실행**한다. 이때 바이트코드의 명령어는 1바이트의 **OpCode와 추가 피연산자**로 이루어지고, 실행 엔진은 하나의 OpCode를 가져와 피연산자와 함께 작업한 후, 그 다음 OpCode를 수행하는 식으로 동작한다.
 
+바이트코드는 JVM은 이해할 수 있지만 아직 기계가 이해할 수 없는 코드다. 따라서 실행 엔진는 바이트코드를 기계가 실행할 수 있는 코드로 **변환**한다. 그리고 그 방식에는 다음 두 가지가 있다.
+
+1. **인터프리터**: 바이트코드의 기본적인 실행 방식이다. 바이트코드 **명령어를 한 줄씩** 해석하고 실행한다. 하나씩 실행하기 때문에 하나하나의 해석은 빠르지만 인터프리팅 결과의 실행은 느리다.
+2. **JIT 컴파일러**(Just-In-Time Compiler): 인터프리터의 단점을 보완하기 위해 도입되었다. 인터프리터 방식대로 실행하다가 적절한 때에 바이트코드 **전체를 컴파일**해서 네이티브 코드로 변경하고, 이후에는 변경된 메소드를 더 이상 인터프리팅하지 않고 **네이티브 코드로 직접 실행**한다. 네이티브 코드를 실행하는 것이 하나씩 인터프리팅하는 것보다 빠르고, 네이티브 코드는 **캐시**에 보관하기 때문에 한 번 컴파일된 코드는 계속 빠르게 수행된다.  
+
+> Reference : [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
+
+## 7. JIT 컴파일러란 무엇이며 어떻게 동작하는가
+
+- JIT의 기본적인 작동 방식은 바로 위의 **실행 엔진**을 참고하고 아래에서는 세부 구조를 살펴보자.
+
+  ![](https://images.velog.io/images/bky373/post/65eafde2-5d57-46cb-ad66-c75701c0d09e/image.png)
+
+  > Reference : [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
+
+- JIT 컴파일러는 바이트코드를 일단 중간 단계의 표현, **IR**(Intermediate Representation)로 변환하여 **최적화**(Optimization)를 수행하고 그 다음에 **네이티브 코드를 생성**(Generating Native Code)한다.
+- 프로파일러(Profiler): 메소드가 여러 번 호출되는, 컴파일이 필요한 **핫스팟** 부분을 찾는 요소이다. 
+- JIT 컴파일러가 컴파일하는 과정은 인터프리팅보다 훨씬 오래 걸리기 때문에, 만약 한 번만 실행되는 코드라면 컴파일하지 않고 인터프리팅하는 것이 훨씬 유리하다.
+
+- JIT가 먼저 실행되고 인터프리터가 그 다음에 실행되는 게 아니라, 런타임 영역에서 일종의 스레드로 같이 실행된다. 그러다가 자주 사용되는 코드가 발견되면 위와 같이 동작한다.
+
+- javac하고는 다르다. javac로 실행할 때랑 전혀 관련이 없다.
+
+  ![](https://images.velog.io/images/bky373/post/dd8719bf-07d1-4aeb-b94e-3748a2a71b8b/image.png)
+
+  
+
+## 8. JDK와 JRE의 차이
+
+> J'D'K > J'R'E > J'V'M
+
+<img src="https://images.velog.io/images/bky373/post/1b1418ef-373c-480b-9fbc-bed4a59776a7/image.png" style="zoom:67%;" />
+
+> [Reference](https://catch-me-java.tistory.com/11?category=438116)
+
+### JDK
+
+> Java **Development** Kit , 자바 **개발** 도구
+
+- 자바 언어를 활용해 포로그램을**개발**할 때 필요하다. 
+- **컴파일러, 역 어셈블러, 디버거**, 의존관계 분석 등 개발에 필요한 도구를 제공한다.
+
+### JRE
+
+> Java **Runtime** Environment, 자바 **실행** 환경
+
+- 자바 언어로 된 프로그램을 **실행**할 때 필요하다.
+- **자바 API와 JVM**으로 구성되며, **자바 애플리케이션**을 클래스 로더를 통해 읽어 들여 **자바 API와 함께 실행**한다. ( [참고](https://d2.naver.com/helloworld/1230) )
+- 자바 9부터는 JRE가 JDK에 포함되었고, 자바 11부터는 JRE만 따로 제공하지 않는다.
+
+## 9. Garbage Collection에 관하여..
+
+[이곳]을 참조
+
+## Referneces
+
+- [[자바 뉴스 라이브] 2020/11/14, 자바 스터디 1주차 - 백기선님 채널](https://www.youtube.com/watch?v=T7NyR5UvyYo&list=PLfI752FpVCS96fSsQe2E3HzYTgdmbz6LU&index=3)
+- [자바 메모리 구조 뿌시기 [ JVM이란? ] - 이정록님 채널 ](https://www.youtube.com/watch?v=AWXPnMDZ9I0)
+- [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
+
+- https://catch-me-java.tistory.com/11?category=438116
+- [The JVM Architecture Explained - DZone Java](https://dzone.com/articles/jvm-architecture-explained)
+- [Inside the Java Virtual Machine](https://www.artima.com/insidejvm/ed2/jvm8.html)
+- [An Introduction to the Constant Pool in the JVM](https://www.baeldung.com/jvm-constant-pool)
