@@ -265,6 +265,7 @@ JVM은 크게
 모든 스레드가 공유하는 영역들
 
 1. 메소드 영역(Method Area): **클래스별 정보**가 저장된다. 
+
    - 클래스 로더 레퍼런스(Class Loader Reference)
    - 런타임 상수 풀(Runtime Constant Pool)
    - 필드 데이터(필드별 이름, 타입 등)
@@ -446,7 +447,9 @@ JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생
   > Reference : [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
 
 - JIT 컴파일러는 바이트코드를 일단 중간 단계의 표현, **IR**(Intermediate Representation)로 변환하여 **최적화**(Optimization)를 수행하고 그 다음에 **네이티브 코드를 생성**(Generating Native Code)한다.
+
 - 프로파일러(Profiler): 메소드가 여러 번 호출되는, 컴파일이 필요한 **핫스팟** 부분을 찾는 요소이다. 
+
 - JIT 컴파일러가 컴파일하는 과정은 인터프리팅보다 훨씬 오래 걸리기 때문에, 만약 한 번만 실행되는 코드라면 컴파일하지 않고 인터프리팅하는 것이 훨씬 유리하다.
 
 - JIT가 먼저 실행되고 인터프리터가 그 다음에 실행되는 게 아니라, 런타임 영역에서 일종의 스레드로 같이 실행된다. 그러다가 자주 사용되는 코드가 발견되면 위와 같이 동작한다.
@@ -486,6 +489,7 @@ JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생
 
 ## Referneces
 
+- [GitHub - whiteship/live-study](https://github.com/whiteship/live-study/issues/1)
 - [[자바 뉴스 라이브] 2020/11/14, 자바 스터디 1주차 - 백기선님 채널](https://www.youtube.com/watch?v=T7NyR5UvyYo&list=PLfI752FpVCS96fSsQe2E3HzYTgdmbz6LU&index=3)
 - [자바 메모리 구조 뿌시기 [ JVM이란? ] - 이정록님 채널 ](https://www.youtube.com/watch?v=AWXPnMDZ9I0)
 - [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
