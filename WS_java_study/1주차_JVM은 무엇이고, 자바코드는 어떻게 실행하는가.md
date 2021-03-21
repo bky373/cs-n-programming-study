@@ -10,11 +10,11 @@
 2. [자바 바이트코드란 무엇인가](#2-자바-바이트코드란-무엇인가)
 3. [자바 애플리케이션 실행하기](#3-자바-애플리케이션-실행하기)
 4. [JVM이란 무엇인가](#4-JVM이란-무엇인가)
-5. [JVM의 구성(이미지)](#5-JVM의-구성(이미지))
+5. [JVM의 구성 이미지](#5-JVM의-구성-이미지)
 6. [JVM 구성 요소가 하는 일](#6-JVM-구성-요소가-하는-일)
 7. [JIT 컴파일러란 무엇이며 어떻게 동작하는가](#7-JIT-컴파일러란-무엇이며-어떻게-동작하는가)
 8. [JDK와 JRE의 차이](#8-JDK와-JRE의-차이)
-9. [Garbage Collection에 관하여..](#Garbage-Collection에-관하여..)
+9. [Garbage Collection에 관하여](#9-Garbage-Collection에-관하여)
 
 ## 1. 자바가 컴파일 하는 방법
 
@@ -183,7 +183,7 @@ Hello Java
 
 > Reference :  [[10분 테코톡] 무민의 JVM Stack & Heap - 우아한Tech 채널](https://www.youtube.com/watch?v=UzaGOXKVhwU)
 
-## 5. JVM의 구성(이미지)
+## 5. JVM의 구성 이미지
 
 <img src="https://images.velog.io/images/bky373/post/50e994f6-f444-4a9d-a732-f01e6e767f90/image.png" style="zoom: 40%;" />	
 
@@ -483,7 +483,7 @@ JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생
 - **자바 API와 JVM**으로 구성되며, **자바 애플리케이션**을 클래스 로더를 통해 읽어 들여 **자바 API와 함께 실행**한다. ( [참고](https://d2.naver.com/helloworld/1230) )
 - 자바 9부터는 JRE가 JDK에 포함되었고, 자바 11부터는 JRE만 따로 제공하지 않는다.
 
-## 9. Garbage Collection에 관하여..
+## 9. Garbage Collection에 관하여
 
 [이곳]을 참조
 
