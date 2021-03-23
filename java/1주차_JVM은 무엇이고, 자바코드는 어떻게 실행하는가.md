@@ -16,6 +16,8 @@
 8. [JDK와 JRE의 차이](#8-JDK와-JRE의-차이)
 9. [Garbage Collection에 관하여](#9-Garbage-Collection에-관하여)
 
+> Ref: [WhiteShip 라이브 스터디 1주차 과제](https://github.com/whiteship/live-study/issues/1)
+
 ## 1. 자바가 컴파일 하는 방법
 
 ### 자바 코드의 컴파일 순서
@@ -489,7 +491,6 @@ JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생
 
 ## Referneces
 
-- [GitHub - whiteship/live-study](https://github.com/whiteship/live-study/issues/1)
 - [[자바 뉴스 라이브] 2020/11/14, 자바 스터디 1주차 - 백기선님 채널](https://www.youtube.com/watch?v=T7NyR5UvyYo&list=PLfI752FpVCS96fSsQe2E3HzYTgdmbz6LU&index=3)
 - [자바 메모리 구조 뿌시기 [ JVM이란? ] - 이정록님 채널 ](https://www.youtube.com/watch?v=AWXPnMDZ9I0)
 - [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
