@@ -12,3 +12,9 @@
 - [4장_제어문](https://github.com/bky373/tech-interview/blob/main/java/4%EC%9E%A5_%EC%A0%9C%EC%96%B4%EB%AC%B8.md#4장_제어문)
 - [5장_클래스](https://github.com/bky373/tech-interview/blob/main/java/5%EC%9E%A5_%ED%81%B4%EB%9E%98%EC%8A%A4.md#5장_클래스)
 - [제네릭](https://github.com/bky373/tech-interview/blob/main/java/%EC%A0%9C%EB%84%A4%EB%A6%AD.md#제네릭)
+
+# 운영체제
+
+- [운영체제 Intro](https://github.com/bky373/cs-n-programming-study/blob/main/os/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C_Intro.md)
+- [운영체제 Intro2](https://github.com/bky373/cs-n-programming-study/blob/main/os/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C_intro2.md)
+
