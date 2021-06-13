@@ -494,7 +494,7 @@ JVM 내에서 메소드가 수행될 때마다 하나의 스택 프레임이 생
 - [[자바 뉴스 라이브] 2020/11/14, 자바 스터디 1주차 - 백기선님 채널](https://www.youtube.com/watch?v=T7NyR5UvyYo&list=PLfI752FpVCS96fSsQe2E3HzYTgdmbz6LU&index=3)
 - [자바 메모리 구조 뿌시기 [ JVM이란? ] - 이정록님 채널 ](https://www.youtube.com/watch?v=AWXPnMDZ9I0)
 - [Naver D2 - JVM Internal](https://d2.naver.com/helloworld/1230)
-
+- [JVM stack과 frame - 기계인간 John Grib 이종립님](https://johngrib.github.io/wiki/jvm-stack/)
 - https://catch-me-java.tistory.com/11?category=438116
 - [The JVM Architecture Explained - DZone Java](https://dzone.com/articles/jvm-architecture-explained)
 - [Inside the Java Virtual Machine](https://www.artima.com/insidejvm/ed2/jvm8.html)
